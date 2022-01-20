@@ -1,5 +1,5 @@
  --create a database--
-CREATE DATABASE todo_database
+CREATE DATABASE todo_database;
 
 --create a Table--
 
