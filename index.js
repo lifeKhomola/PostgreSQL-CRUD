@@ -9,8 +9,21 @@ app.use(express.json());
 //routes
 
 //get all todos
+app.get("/todos",async (req,res) =>{
+    try {
+        const allTodos = await pool.query(
+            "SELECT * FROM todo"
+        );
+        res.json(allTodos.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+})
 
 //get a todo
+app.get("/todos/:id", async (req,res)=>{
+        
+});
 //create a todo
 
 app.post("/todos", async(req,res)=>{
@@ -19,13 +32,13 @@ app.post("/todos", async(req,res)=>{
         //it continues
         const {description} = req.body;
         const newTodo = await pool.query(
-        "INSERT INTO todo (description) VALUES ($1) RETURNING ",[description]);
+        "INSERT INTO todo (description) VALUES ($1) RETURNING *",[description]);
         // console.log(req.body)
-        res.json(newTodo);
-        console.log(req.body)
+        res.json(newTodo.rows[0]);
+        
     } 
-    catch {
-
+    catch (err) {
+        onsole.error(err.message)
     }
         
    
